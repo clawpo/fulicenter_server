@@ -135,7 +135,12 @@ public class FuLiCenterBiz implements IFuLiCenterBiz{
 	public boolean updateCart(int cartId,int count) {
 		return dao.updateCart(cartId,count);
 	}
-
+	
+	@Override
+	public boolean updateCart(int cartId,int count,boolean isChecked) {
+		return dao.updateCart(cartId,count,isChecked);
+	}
+	
 	@Override
 	public CartBean[] findCarts(String userName,int pageId, int pageSize) {
 		return dao.findCarts(userName,pageId, pageSize);

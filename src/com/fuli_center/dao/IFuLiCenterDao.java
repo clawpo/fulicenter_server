@@ -35,6 +35,12 @@ public interface IFuLiCenterDao {
 	 * @return
 	 */
 	public boolean updateCart(int cartId,int count);
+	/**
+	 * 更新购物车
+	 * @param cart
+	 * @return
+	 */
+	public boolean updateCart(int cartId,int count,boolean isChecked);
 	
 	/**
 	 *从购物车下载数据

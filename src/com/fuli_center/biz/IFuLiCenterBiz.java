@@ -209,6 +209,13 @@ public interface IFuLiCenterBiz {
 	 * @return
 	 */
 	public boolean updateCart(int cartId,int count);
+
+	/**
+	 * 修改购物车中的商品信息
+	 * @param cart
+	 * @return
+	 */
+	public boolean updateCart(int cartId,int count,boolean isChecked);
 	
 	/**
 	 * 查找购物车中的一组数据

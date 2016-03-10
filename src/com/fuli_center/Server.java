@@ -493,7 +493,8 @@ public class Server extends HttpServlet {
 			HttpServletResponse response) {
 		int cartId=Integer.parseInt(request.getParameter(IFuLiCenterBiz.Cart.ID));
 		int count=Integer.parseInt(request.getParameter(IFuLiCenterBiz.Cart.COUNT));
-		boolean isSuccess = biz.updateCart(cartId, count);
+		boolean isChecked=Boolean.parseBoolean(request.getParameter(IFuLiCenterBiz.Cart.IS_CHECKED));
+		boolean isSuccess = biz.updateCart(cartId, count, isChecked);
 		ObjectMapper om=new ObjectMapper();
 		MessageBean msg=null;
 		if(isSuccess){

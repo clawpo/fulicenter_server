@@ -55,6 +55,7 @@ public class FuLiCenterDao implements IFuLiCenterDao {
 		}
 		if(count>0){
 			int id=findCatLastId();
+			System.out.println("dao.addCart.lastId="+id);
 			return id;
 		}
 		return 0;
@@ -113,6 +114,30 @@ public class FuLiCenterDao implements IFuLiCenterDao {
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, count);
 			statement.setInt(2, cartId);
+			return statement.executeUpdate() == 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcUtils.closeAll(null, statement, connection);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateCart(int cartId,int count,boolean isChecked) {
+		PreparedStatement statement = null;
+		Connection connection = JdbcUtils.getConnection();
+		String sql = "update " + IFuLiCenterBiz.Cart.TABLE_NAME + " set "
+				+ IFuLiCenterBiz.Cart.COUNT + "=?,"
+				+ IFuLiCenterBiz.Cart.IS_CHECKED + "=?" + " where "
+				+ IFuLiCenterBiz.Cart.ID + "=?";
+		System.out.println("sql="+sql);
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, count);
+			statement.setInt(2, isChecked?1:0);
+			statement.setInt(3, cartId);
 			return statement.executeUpdate() == 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
