@@ -228,6 +228,15 @@ public interface IFuLiCenterDao {
 	CollectBean[] findCollects(String userName,int pageId,int pageSize);
 
 	/**
+	 * 下载指定用户的收藏数量
+	 * @param userName：用户账号
+	 * @param pageId
+	 * @param pageSize
+	 * @return
+	 */
+	int findCollectCount(String userName);
+
+	/**
 	 * 获取指定用户是否收藏了指定商品
 	 * @param userName
 	 * @param goodsId

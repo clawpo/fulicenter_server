@@ -153,6 +153,8 @@ public class Server extends HttpServlet {
 	private static final String REQUEST_DELETE_COLLECT="delete_collect";
     /** 下载收藏的商品信息*/
 	private static final String REQUEST_FIND_COLLECTS="find_collects";
+    /** 下载收藏的商品数量信息*/
+	private static final String REQUEST_FIND_COLLECT_COUNT="find_collect_count";
 	
 	/** 删除收藏*/
 	private static final String REQUEST_DELETE_WARDROBE="delete_wardrobe";
@@ -257,6 +259,9 @@ public class Server extends HttpServlet {
 			break;
 		case REQUEST_FIND_COLLECTS:
 			findCollects(request,response);
+			break;
+		case REQUEST_FIND_COLLECT_COUNT:
+			findCollectCount(request,response);
 			break;
 		case REQUEST_ADD_CART:
 			addCart(request,response);
@@ -600,6 +605,31 @@ public class Server extends HttpServlet {
 		ObjectMapper om=new ObjectMapper();
 		try {
 			om.writeValue(response.getOutputStream(), collects);
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void findCollectCount(HttpServletRequest request,
+			HttpServletResponse response){
+		String userName=request.getParameter(IFuLiCenterBiz.User.USER_NAME);
+		int count = biz.findCollectCount(userName);
+		ObjectMapper om=new ObjectMapper();
+		try {
+			MessageBean msg=null;
+			if(count>0){
+				msg=new MessageBean(true, ""+count);
+			}else{
+				msg=new MessageBean(false, "查询失败");
+			}
+			om.writeValue(response.getOutputStream(), msg);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

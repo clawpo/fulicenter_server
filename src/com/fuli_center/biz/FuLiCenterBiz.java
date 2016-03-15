@@ -188,6 +188,12 @@ public class FuLiCenterBiz implements IFuLiCenterBiz{
 		return dao.findCollects(userName, pageId, pageSize);
 	}
 	
+
+	@Override
+	public int findCollectCount(String userName) {
+		return dao.findCollectCount(userName);
+	}
+	
 	@Override
 	public boolean isCollect(String userName, int goodsId) {
 		return dao.isCollect(userName, goodsId);
@@ -207,4 +213,5 @@ public class FuLiCenterBiz implements IFuLiCenterBiz{
 	public boolean upldateNick(String nick,String userName) {
 		return dao.updateNick(nick, userName);
 	}
+
 }

@@ -1033,6 +1033,33 @@ public class FuLiCenterDao implements IFuLiCenterDao {
 		}
 		return null;
 	}
+	
+
+	@Override
+	public int findCollectCount(String userName) {
+		System.out.println("findCollectCount,userName="+userName);
+		ResultSet set = null;
+		PreparedStatement statement = null;
+		Connection connection = JdbcUtils.getConnection();
+		String sql = "select count(*) as count from " + IFuLiCenterBiz.Collect.TABLE_NAME
+				+ " where " + IFuLiCenterBiz.Collect.USER_NAME + "=?";
+		try {
+			CollectBean w=new CollectBean();
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, userName);
+			set = statement.executeQuery();
+			if (set.next()) {
+				int count=set.getInt(IFuLiCenterBiz.Collect.COUNT);
+				return count;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcUtils.closeAll(set, statement, connection);
+		}
+		return 0;
+	}
 
 	/**
 	 * 读取一条收藏的商品的记录
@@ -1146,4 +1173,5 @@ public class FuLiCenterDao implements IFuLiCenterDao {
 		good.setShareUrl(set.getString(IFuLiCenterBiz.GoodDetails.SHARE_URL));
 		return good;
 	}
+
 }

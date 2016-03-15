@@ -149,6 +149,8 @@ public interface IFuLiCenterBiz {
 		public static final String GOODS_THUMB="goodsThumb";
 		public static final String GOODS_IMG="goodsImg";
 		public static final String ADD_TIME="addTime";
+		
+		public static final String COUNT = "count";
 	}
 	
 	public static final String AVATAR_PATH = "F:/0-Android/project/FuLiCenter/";
@@ -395,6 +397,16 @@ public interface IFuLiCenterBiz {
 	 * @return
 	 */
 	CollectBean[] findCollects(String userName,int pageId,int pageSize);
+	
+
+	/**
+	 * 下载指定用户的收藏数量
+	 * @param userName：用户账号
+	 * @param pageId
+	 * @param pageSize
+	 * @return
+	 */
+	int findCollectCount(String userName);
 	
 	/**
 	 * 获取指定用户是否收藏了指定商品
